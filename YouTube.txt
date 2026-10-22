@@ -1,18 +1,3 @@
-! YT consent
-youtube.com##+js(set, ytInitialData.topbar.desktopTopbarRenderer.interstitial.consentBumpRenderer.forceConsent, false)
-youtube.com##+js(json-prune, [].response.topbar.desktopTopbarRenderer.interstitial.consentBumpRenderer)
-youtube.com##+js(json-prune, topbar.desktopTopbarRenderer.interstitial.consentBumpRenderer)
-
-! 2021-12-01: When specific videos redirect persistently to consent page try this filter (discussion: https://redd.it/r3ec5x ):
-youtube.com##+js(set, ytInitialData.onResponseReceivedEndpoints, undefined)
-
-! 2021-12-14 YT consent v2 https://github.com/uBlockOrigin/uAssets/issues/7636#issuecomment-992858673
-youtube.com##+js(set, ytInitialData.topbar.desktopTopbarRenderer.interstitial.consentBumpV2Renderer, undefined)
-youtube.com##+js(json-prune, [].response.overlay.consentBumpV2Renderer topbar.desktopTopbarRenderer.interstitial.consentBumpV2Renderer overlay.consentBumpV2Renderer response.overlay.consentBumpV2Renderer)
-
-! 2022-10-16 when navigating directly to #shorts
-youtube.com##+js(set, ytInitialData.desktopTopbar.desktopTopbarRenderer.interstitial.consentBumpV2Renderer, undefined)
-
 ! YT - Homepage and Subscriptions (Grid View) - Hide the Shorts section
 youtube.com##[is-shorts]
 ! YT - Menu - Hide the Shorts button
@@ -46,15 +31,6 @@ m.youtube.com##[tab-title="Shorts"]
 m.youtube.com##[tab-identifier="FEhistory"] ytm-compact-video-renderer:has(>div>a[href^="/shorts/"])
 Mixes and YT Playlists
 
-! YT Home - Hide Mixes
-youtube.com##ytd-rich-item-renderer:has([href*="start_radio=1"])
-! YT Sidebar - Hide Mixes
-youtube.com##ytd-compact-radio-renderer, :is(#related yt-lockup-view-model,ytd-compact-video-renderer):has([href*="&start_radio=1"])
-! YT Search- Hide Mixes
-youtube.com##ytd-radio-renderer, :is(ytd-search yt-lockup-view-model,ytd-video-renderer[is-search]):has([href*="&start_radio=1"][aria-haspopup])
-! YT Player - Hide Mixes in Video End Cards
-youtube.com##.ytp-videowall-still[data-is-mix="true"]
-
 ! YT Sidebar - Hide "YouTube" (Music) playlists
 youtube.com##ytd-compact-playlist-renderer:has([title^="YouTube"])
 
@@ -73,5 +49,3 @@ Source: https://www.reddit.com/r/uBlockOrigin/comments/ptca28/how_to_remove_junk
 
 ! YT Search - hide results based on channel names
 www.youtube.com##ytd-search ytd-video-renderer:has(#text.ytd-channel-name:is([title="Exact channel name 1"], [title="Exact channel name 2"]))
-
-youtube.com##ytd-popup-container > tp-yt-paper-dialog > ytd-mealbar-promo-renderer, ytd-popup-container > tp-yt-paper-dialog > yt-mealbar-promo-renderer:has-text(/Claim Offer|Join now|Not Now|No thanks|YouTube TV|live TV|Live TV|movies|sports|Try it free|unlimited DVR|watch NFL/)
